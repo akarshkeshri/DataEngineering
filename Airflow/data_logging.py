@@ -1,6 +1,6 @@
 from data_transformation import transformation
 from data_call import fetch_api
-from database import database
+from database import database_fnc
 
 
 class implementing_logging:

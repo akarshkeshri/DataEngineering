@@ -1,3 +1,5 @@
 python-dotenv
 airflow
 psycopg2
+pyodbc pandas
+
