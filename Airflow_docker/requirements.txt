@@ -1,0 +1,12 @@
+python-dotenv
+psycopg2
+pyodbc pandas
+pandas
+numpy
+requests
+sqlalchemy
+apache-airflow==2.8.0
+apache-airflow-providers-postgres
+
+
+

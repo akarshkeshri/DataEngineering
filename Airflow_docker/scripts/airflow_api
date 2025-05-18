@@ -1,0 +1,43 @@
+from data_transformation import transformation
+from airflow import DAG
+from airflow.operators import *  #.python_operator import PythonOperator
+from airflow.operators.python_operator import PythonOperator
+from datetime import datetime, timedelta
+import requests
+import time
+
+
+# Define default arguments
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'start_date': datetime(2023, 1, 1),
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
+
+# Define the DAG
+dag = DAG(
+    'fetch_data_from_apis',
+    default_args=default_args,
+    description='A simple DAG to fetch data from multiple APIs',
+    schedule_interval=timedelta(days=1),
+)
+
+# Create PythonOperator tasks
+fetch_data_1 = PythonOperator(
+    task_id='fetch_data_from_apis',
+    python_callable=transformation.fetch_nytimes_books,
+    dag=dag,
+)
+
+fetch_data_2 = PythonOperator(
+    task_id='fetch_data_from_apis',
+    python_callable=transformation.fetch_openlibrary_data,
+    dag=dag,
+)
+
+# Set task dependencies
+fetch_data_1 >> fetch_data_2
