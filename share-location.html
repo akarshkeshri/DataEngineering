@@ -33,7 +33,7 @@
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
 
-        fetch("https://YOUR-SERVER-URL/location", {
+        fetch("https://dataengineering.onrender.com/location", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ lat, lon, time: new Date().toISOString() })
